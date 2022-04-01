@@ -2,21 +2,36 @@
 using Application.Core.ProjectAggregate;
 using Application.Infrastructure.Persistence;
 using Application.SharedKernel;
-using System.Data.Entity;
 
 namespace Application.Infrastructure.Repository
 {
     public class PersonRepository : RepositoryBase<Person>, IPersonRepository
     {
         private readonly AppDbContext _dbContext;
-        public PersonRepository(AppDbContext dbContext) : base(dbContext)
+        private readonly IAddressRepository _addRessRepository;
+
+        public PersonRepository(AppDbContext dbContext, IAddressRepository addressRepository) : base(dbContext)
         {
             _dbContext = dbContext;
+            _addRessRepository = addressRepository;
         }
 
-        public List<Person> ListWithDependentObjectsAsync()
+        //Include Does not worked here, so I did not spent many time on fixing that.
+        public async Task<List<Person>> ListWithDependentObjectsAsync(CancellationToken cancellationToken)
         {
-            return _dbContext.Persons.Include(x => x.Address).ToList();
+            var persons = await ListAsync(cancellationToken);
+
+            foreach (var person in persons)
+            {
+#pragma warning disable CS8714 // The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match 'notnull' constraint.
+                var address = await _addRessRepository.GetByIdAsync(person.AddressId, cancellationToken);
+#pragma warning restore CS8714 // The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match 'notnull' constraint.
+
+                if (address != null)
+                    person.Address = address;
+            }
+
+            return persons;
         }
     }
 }

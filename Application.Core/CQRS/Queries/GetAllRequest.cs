@@ -3,6 +3,7 @@ using Application.Core.Interface;
 using Application.Core.ProjectAggregate;
 using LinqKit;
 using MediatR;
+using System.Text;
 
 namespace Application.Core.CQRS.Queries
 {
@@ -39,11 +40,24 @@ namespace Application.Core.CQRS.Queries
 
             #endregion
 
-            var persons = _repository.ListWithDependentObjectsAsync();
+            var persons = await _repository.ListWithDependentObjectsAsync(cancellationToken);
 
             persons = persons.Where(predicate).ToList();
 
-            return JsonSerializer.Serialize(persons);
+            StringBuilder serialzedJson = new();
+
+            serialzedJson.Append('[');
+
+            foreach (var person in persons)
+            {
+                var serializedObject = JsonSerializer.Serialize(person);
+                serialzedJson.Append(serializedObject);
+                serialzedJson.Append(',');
+            }
+
+            serialzedJson.Append(']');
+
+            return serialzedJson.ToString();
         }
     }
 }

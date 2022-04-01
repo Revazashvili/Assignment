@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Application.SharedKernel.BaseEntity;
+using System.Text;
 
 namespace Application.Core.Common
 {
@@ -19,7 +20,6 @@ namespace Application.Core.Common
             string subObjectName = string.Empty;
             bool subObjectCreationFlag = false;
 
-            // addressline : wkapwkap,}
             foreach (var commaSplitedItem in json.Split(','))
             {
                 var removedWhiteSpaces = commaSplitedItem.Replace(" ", "");
@@ -106,33 +106,59 @@ namespace Application.Core.Common
                     }
                 }
             }
+
             return newlyCreatedObject;
         }
 
         public static string Serialize<TValue>(TValue value)
         {
-            StringBuilder jsonValue = new StringBuilder();
+            StringBuilder jsonValue = new();
 
-            jsonValue.Append("{");
+            jsonValue.Append('{');
 
-            var myListElementType = value.GetType().GetGenericArguments().Single();
-
-            foreach (var property in myListElementType.GetProperties())
+            foreach (var property in value.GetType().GetProperties())
             {
-                if (property.GetValue(myListElementType) != null)
+                var propertyValue = property.GetValue(value);
+
+                if (propertyValue != null)
                 {
-                    jsonValue.Append($"{property.Name.ToLower()}");
-                    jsonValue.Append(":");
-                    jsonValue.Append(property.GetValue(value).ToString());
-                    jsonValue.Append(",");
+                    if (property.PropertyType.BaseType == typeof(BaseEntity))
+                    {
+                        jsonValue.Append($"{property.Name.ToLower()}");
+                        jsonValue.Append(':');
+                        jsonValue.Append('{');
+
+                        var subClass = property.GetValue(value);
+
+                        foreach (var subClassProperty in subClass.GetType().GetProperties())
+                        {
+                            var subClassPropertyValue = subClassProperty.GetValue(subClass);
+                            AppendSerilaizedJson(jsonValue, subClassProperty, subClassPropertyValue);
+                        }
+
+                        jsonValue.Append('}');
+                        jsonValue.Append(',');
+
+                        continue;
+                    }
+                    AppendSerilaizedJson(jsonValue, property, propertyValue.ToString());
                 }
             }
 
-            jsonValue.Append("}");
+            jsonValue.Append('}');
 
             return jsonValue.ToString();
         }
 
+        private static void AppendSerilaizedJson(StringBuilder jsonValue, System.Reflection.PropertyInfo subClassProperty, object? subClassPropertyValue)
+        {
+            jsonValue.Append($"{subClassProperty.Name.ToLower()}");
+            jsonValue.Append(':');
+            jsonValue.Append("'");
+            jsonValue.Append(subClassPropertyValue.ToString());
+            jsonValue.Append("'");
+            jsonValue.Append(',');
+        }
         private static void SetValuesToProperties(string subjsonPropertyName, string subjsonValue, object? subObject, System.Reflection.PropertyInfo[] subObjectProperties)
         {
             foreach (var subProeprty in from subProeprty in subObjectProperties

@@ -53,7 +53,7 @@ namespace Application.SharedKernel
         public virtual async Task<T> GetByIdAsync<TId>(TId id, CancellationToken cancellationToken = default) where TId : notnull
         {
 #pragma warning disable CS8603 // Possible null reference return.
-            return await dbContext.Set<T>().FindAsync(cancellationToken, new object[] { id });
+            return await dbContext.Set<T>().FindAsync(new object[] { id }, cancellationToken);
 #pragma warning restore CS8603 // Possible null reference return.
         }
         /// <inheritdoc/>

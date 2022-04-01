@@ -13,8 +13,8 @@ namespace Application.Api.Controllers
             await Mediator.Send(new SavePersonCommand { JsonData = json });
 
 
-        [HttpGet("GetAll")]
-        public async Task<string> GetAll([FromQuery]GetAllRequest request) =>
+        [HttpPost("GetAll")]
+        public async Task<string> GetAll(GetAllRequest request) =>
             await Mediator.Send(request);
 
     }

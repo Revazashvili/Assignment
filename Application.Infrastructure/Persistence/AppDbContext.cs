@@ -16,11 +16,15 @@ namespace Application.Infrastructure.Persistence
         public DbSet<Address> Addresses { get; set; }
 
 
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Person>()
+                   .HasOne(q => q.Address)
+                   .WithOne()
+                   .IsRequired();
+
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }
