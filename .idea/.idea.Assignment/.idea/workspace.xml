@@ -9,7 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e9e0c5e-4900-406e-bdd3-cc28de2b8f91" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assignment/Controllers/PersonController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment/Controllers/PersonController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application.Infrastructure/ServiceCollectionExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application.Infrastructure/ServiceCollectionExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +23,9 @@
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///home/revazashvili/dotnet/Assignment/Application.Infrastructure/ServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -86,7 +90,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1651919574870</updated>
-      <workItem from="1651919587032" duration="1867000" />
+      <workItem from="1651919587032" duration="2276000" />
     </task>
     <task id="LOCAL-00001" summary=".idea files">
       <created>1651919649111</created>
@@ -116,7 +120,21 @@
       <option name="project" value="LOCAL" />
       <updated>1651951881065</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix routing attribute">
+      <created>1651952007400</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1651952007400</updated>
+    </task>
+    <task id="LOCAL-00006" summary="inject IAppDbContext in DI Container">
+      <created>1651952233046</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1651952233046</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -141,6 +159,27 @@
     <MESSAGE value="remove repository pattern" />
     <MESSAGE value="remove unused classes" />
     <MESSAGE value="fix class and method names" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix class and method names" />
+    <MESSAGE value="fix routing attribute" />
+    <MESSAGE value="inject IAppDbContext in DI Container" />
+    <option name="LAST_COMMIT_MESSAGE" value="inject IAppDbContext in DI Container" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Application.Core/CQRS/Queries/GetAllRequest.cs</url>
+          <line>27</line>
+          <properties documentPath="$PROJECT_DIR$/Application.Core/CQRS/Queries/GetAllRequest.cs" initialLine="27" containingFunctionPresentation="method 'Handle'">
+            <startOffsets>
+              <option value="808" />
+            </startOffsets>
+            <endOffsets>
+              <option value="809" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
