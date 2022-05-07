@@ -1,5 +1,5 @@
-﻿using Application.SharedKernel.BaseEntity;
-using System.Text;
+﻿using System.Text;
+using Application.Core.Base;
 
 namespace Application.Core.Common;
 

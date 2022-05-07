@@ -1,8 +1,8 @@
-﻿using EntityBase = Application.SharedKernel.BaseEntity.BaseEntity;
+﻿using Application.Core.Base;
 
 namespace Application.Core.ProjectAggregate;
 
-public class Person : EntityBase
+public class Person : BaseEntity
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
