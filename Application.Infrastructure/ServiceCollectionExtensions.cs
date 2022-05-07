@@ -4,13 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Infrastructure
 {
-    public static  class Startup
+    public static  class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddInfrastructre(this IServiceCollection services, string connectionString)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(
-                    connectionString,
+                options.UseSqlServer(connectionString,
                     b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
             
             return services;

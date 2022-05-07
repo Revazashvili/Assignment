@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Application.Core
 {
-    public static class Startup
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
