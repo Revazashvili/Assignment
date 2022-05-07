@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class PersonController : ApiControllerBase
     {
@@ -13,7 +13,7 @@ namespace Application.Api.Controllers
             await Mediator.Send(new SavePersonCommand { JsonData = json });
 
 
-        [HttpPost("GetAll")]
+        [HttpPost]
         public async Task<string> GetAll(GetAllRequest request) =>
             await Mediator.Send(request);
 
