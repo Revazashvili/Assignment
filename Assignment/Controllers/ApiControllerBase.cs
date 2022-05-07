@@ -7,8 +7,6 @@ namespace Application.Api.Controllers
     {
         private ISender? _mediator;
 
-#pragma warning disable CS8603 // Possible null reference return.
-        protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetService<ISender>();
-#pragma warning restore CS8603 // Possible null reference return.
+        protected ISender Mediator => (_mediator ??= HttpContext.RequestServices.GetService<ISender>()) ?? throw new InvalidOperationException();
     }
 }
