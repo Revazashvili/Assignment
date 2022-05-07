@@ -21,7 +21,9 @@ public class GetAll
         public async Task<string> Handle(Query request, CancellationToken cancellationToken)
         {
             var predicate = BuildPredicate(request);
-            var persons = await _dbContext.Persons.Include(person => person.Address).Where(predicate)
+            var persons = await _dbContext.Persons
+                .Include(person => person.Address)
+                .Where(predicate)
                 .ToListAsync(cancellationToken);
             StringBuilder serializedJson = new();
 
