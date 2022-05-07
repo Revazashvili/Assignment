@@ -9,8 +9,6 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddMediatR(Assembly.GetExecutingAssembly());
-
-        // MapperConfig.ConfigureMapper();
         return services;
     }
 }
