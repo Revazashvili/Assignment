@@ -10,9 +10,12 @@ namespace Application.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
-                    b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
+            if (Convert.ToBoolean(configuration.GetSection("UseInMemoryDatabase")?.Value))
+                services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("TestDb"));
+            else
+                services.AddDbContext<AppDbContext>(options =>
+                    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                        b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
             services.AddScoped<IAppDbContext, AppDbContext>();
             return services;
         }
