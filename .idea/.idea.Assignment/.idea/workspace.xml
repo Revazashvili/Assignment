@@ -9,9 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e9e0c5e-4900-406e-bdd3-cc28de2b8f91" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Application.Infrastructure/Application.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Application.Infrastructure/Application.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application.Infrastructure/ServiceCollectionExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application.Infrastructure/ServiceCollectionExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignment/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment/appsettings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application.Infrastructure/Persistence/Configurations/PersonConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application.Infrastructure/Persistence/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application.Infrastructure/Persistence/AppDbContext.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +25,9 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///home/revazashvili/dotnet/Assignment/Application.Core/Common/JsonSerializer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/revazashvili/dotnet/Assignment/Application.Infrastructure/ServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/revazashvili/dotnet/Assignment/Assignment/Controllers/ApiControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -91,7 +92,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1651919574870</updated>
-      <workItem from="1651919587032" duration="2577000" />
+      <workItem from="1651919587032" duration="2893000" />
     </task>
     <task id="LOCAL-00001" summary=".idea files">
       <created>1651919649111</created>
@@ -142,7 +143,28 @@
       <option name="project" value="LOCAL" />
       <updated>1651952423287</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="add in memory db option">
+      <created>1651952719884</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1651952719884</updated>
+    </task>
+    <task id="LOCAL-00009" summary="throw exception when Mediator is null">
+      <created>1651952759906</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1651952759906</updated>
+    </task>
+    <task id="LOCAL-00010" summary="convert entire solution to file scoped namespaces">
+      <created>1651952895785</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1651952895785</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,7 +192,10 @@
     <MESSAGE value="fix routing attribute" />
     <MESSAGE value="inject IAppDbContext in DI Container" />
     <MESSAGE value="change AddInfrastructure parameters" />
-    <option name="LAST_COMMIT_MESSAGE" value="change AddInfrastructure parameters" />
+    <MESSAGE value="add in memory db option" />
+    <MESSAGE value="throw exception when Mediator is null" />
+    <MESSAGE value="convert entire solution to file scoped namespaces" />
+    <option name="LAST_COMMIT_MESSAGE" value="convert entire solution to file scoped namespaces" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -180,26 +205,13 @@
           <line>27</line>
           <properties documentPath="$PROJECT_DIR$/Application.Core/CQRS/Queries/GetAllRequest.cs" initialLine="27" containingFunctionPresentation="method 'Handle'">
             <startOffsets>
-              <option value="808" />
+              <option value="748" />
             </startOffsets>
             <endOffsets>
-              <option value="809" />
+              <option value="749" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Application.Core/CQRS/Queries/GetAllRequest.cs</url>
-          <line>43</line>
-          <properties documentPath="$PROJECT_DIR$/Application.Core/CQRS/Queries/GetAllRequest.cs" initialLine="43" containingFunctionPresentation="method 'Handle'">
-            <startOffsets>
-              <option value="1378" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1482" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
