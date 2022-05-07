@@ -1,6 +1,4 @@
-﻿using Application.Core.Interface;
-using Application.Infrastructure.Persistence;
-using Application.Infrastructure.Repository;
+﻿using Application.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,10 +12,7 @@ namespace Application.Infrastructure
                 options.UseSqlServer(
                     connectionString,
                     b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
-
-            services.AddTransient<IAddressRepository, AddressRepository>();
-            services.AddTransient<IPersonRepository, PersonRepository>();
-
+            
             return services;
         }
     }

@@ -1,9 +1,10 @@
 ﻿using Application.Core.Common;
-using Application.Core.Interface;
 using Application.Core.ProjectAggregate;
 using LinqKit;
 using MediatR;
 using System.Text;
+using Application.Core.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Core.CQRS.Queries
 {
@@ -16,11 +17,11 @@ namespace Application.Core.CQRS.Queries
 
     public class GetAllRequestQueryHandler : IRequestHandler<GetAllRequest, string>
     {
-        private readonly IPersonRepository _repository;
+        private readonly IAppDbContext _dbContext;
 
-        public GetAllRequestQueryHandler(IPersonRepository repository)
+        public GetAllRequestQueryHandler(IAppDbContext dbContext)
         {
-            _repository = repository;
+            _dbContext = dbContext;
         }
 
         public async Task<string> Handle(GetAllRequest request, CancellationToken cancellationToken)
@@ -40,24 +41,24 @@ namespace Application.Core.CQRS.Queries
 
             #endregion
 
-            var persons = await _repository.ListWithDependentObjectsAsync(cancellationToken);
+            var persons = await _dbContext.Persons.Include(person => person.Address).ToListAsync(cancellationToken);
 
             persons = persons.Where(predicate).ToList();
 
-            StringBuilder serialzedJson = new();
+            StringBuilder serializedJson = new();
 
-            serialzedJson.Append('[');
+            serializedJson.Append('[');
 
             foreach (var person in persons)
             {
                 var serializedObject = JsonSerializer.Serialize(person);
-                serialzedJson.Append(serializedObject);
-                serialzedJson.Append(',');
+                serializedJson.Append(serializedObject);
+                serializedJson.Append(',');
             }
 
-            serialzedJson.Append(']');
+            serializedJson.Append(']');
 
-            return serialzedJson.ToString();
+            return serializedJson.ToString();
         }
     }
 }
