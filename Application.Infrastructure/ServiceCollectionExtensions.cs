@@ -1,4 +1,5 @@
-﻿using Application.Infrastructure.Persistence;
+﻿using Application.Core.Interfaces;
+using Application.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +12,7 @@ namespace Application.Infrastructure
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString,
                     b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
-            
+            services.AddScoped<IAppDbContext, AppDbContext>();
             return services;
         }
     }
