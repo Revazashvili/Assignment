@@ -2,25 +2,24 @@
 using Application.Core.ProjectAggregate;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Infrastructure.Persistence
+namespace Application.Infrastructure.Persistence;
+
+public class AppDbContext : DbContext,IAppDbContext
 {
-    public class AppDbContext : DbContext,IAppDbContext
-    {
-        public AppDbContext(DbContextOptions options) : base(options) { }
+    public AppDbContext(DbContextOptions options) : base(options) { }
 
-        //DbSets Goes Here
-        public DbSet<Person> Persons { get; set; }
-        public DbSet<Address> Addresses { get; set; }
+    //DbSets Goes Here
+    public DbSet<Person> Persons { get; set; }
+    public DbSet<Address> Addresses { get; set; }
         
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Person>()
-                   .HasOne(q => q.Address)
-                   .WithOne()
-                   .IsRequired();
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Person>()
+            .HasOne(q => q.Address)
+            .WithOne()
+            .IsRequired();
 
-            base.OnModelCreating(modelBuilder);
-        }
-
+        base.OnModelCreating(modelBuilder);
     }
+
 }
