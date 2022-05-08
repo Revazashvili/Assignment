@@ -1,30 +1,21 @@
-﻿using Application.Core.ProjectAggregate;
+﻿using System.Reflection;
+using Application.Core.Interfaces;
+using Application.Core.ProjectAggregate;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Infrastructure.Persistence
+namespace Application.Infrastructure.Persistence;
+
+public class AppDbContext : DbContext,IAppDbContext
 {
-    public class AppDbContext : DbContext
+    public AppDbContext(DbContextOptions options) : base(options) { }
+
+    public DbSet<Person> Persons { get; set; }
+    public DbSet<Address> Addresses { get; set; }
+        
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        public AppDbContext(DbContextOptions options) : base(options)
-        { }
-
-        public AppDbContext()
-        { }
-
-        //DbSets Goes Here
-        public DbSet<Person> Persons { get; set; }
-        public DbSet<Address> Addresses { get; set; }
-
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Person>()
-                   .HasOne(q => q.Address)
-                   .WithOne()
-                   .IsRequired();
-
-            base.OnModelCreating(modelBuilder);
-        }
-
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        base.OnModelCreating(modelBuilder);
     }
+
 }

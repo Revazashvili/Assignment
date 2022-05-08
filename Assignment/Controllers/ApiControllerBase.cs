@@ -1,14 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Application.Api.Controllers
-{
-    public class ApiControllerBase : ControllerBase
-    {
-        private ISender? _mediator;
+namespace Application.Api.Controllers;
 
-#pragma warning disable CS8603 // Possible null reference return.
-        protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetService<ISender>();
-#pragma warning restore CS8603 // Possible null reference return.
-    }
+public class ApiControllerBase : ControllerBase
+{
+    private ISender? _mediator;
+
+    protected ISender Mediator => (_mediator ??= HttpContext.RequestServices.GetService<ISender>()) ?? throw new InvalidOperationException();
 }

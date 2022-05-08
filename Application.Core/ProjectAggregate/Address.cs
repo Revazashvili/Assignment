@@ -1,11 +1,9 @@
-﻿using EntityBase = Application.SharedKernel.BaseEntity.BaseEntity;
+﻿using Application.Core.Base;
 
+namespace Application.Core.ProjectAggregate;
 
-namespace Application.Core.ProjectAggregate
+public class Address : BaseEntity
 {
-    public class Address : EntityBase
-    {
-        public string City { get; set; }
-        public string AddressLine { get; set; }
-    }
+    public string City { get; set; }
+    public string AddressLine { get; set; }
 }
